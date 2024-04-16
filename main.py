@@ -40,8 +40,8 @@ def main():
                 spans_inside_h6 = h6.find_all('span')
                 spans.extend(spans_inside_h6)
 
-        # text_to_match = "QC Canada"
-        text_to_match = "Y Germany"
+        text_to_match = "QC Canada"
+        # text_to_match = "Y Germany"
         email = False
         places = []
         for span in spans:
@@ -94,6 +94,4 @@ def send_email(mes):
     print('Email sent successfully')
 
 if __name__ == "__main__":
-    while True:
         main()
-        time.sleep(300)  # Sleep for 5 minutes

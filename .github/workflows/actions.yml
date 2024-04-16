@@ -25,8 +25,8 @@ jobs:
           
       - name: execute py script # run main.py
         env:
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
         run: python main.py
           
       # - name: commit files

@@ -6,11 +6,25 @@ from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import os
 import time
+import logging
+import logging.handlers
 
 load_dotenv()
 
 # The URL you will send the POST request to
 url = 'https://hvr-amazon.my.site.com/BBIndex'
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger_file_handler = logging.handlers.RotatingFileHandler(
+    "status.log",
+    maxBytes=1024 * 1024,
+    backupCount=1,
+    encoding="utf8",
+)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger_file_handler.setFormatter(formatter)
+logger.addHandler(logger_file_handler)
 
 def main():
     # Send the GET request
@@ -52,7 +66,7 @@ def main():
                 break
 
         if email:
-            print("Sending email")
+            # print("Sending email")
             send_email(places)
 
 def send_email(mes):
@@ -91,7 +105,7 @@ def send_email(mes):
         server.login(smtp_username, smtp_password)
         server.send_message(email_message)
 
-    print('Email sent successfully')
+    logger.info(f"Token value: Email sent. To following places: \n {message_list(mes)}")
 
 if __name__ == "__main__":
         main()

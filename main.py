@@ -87,7 +87,7 @@ def send_email(mes):
     # Create a multipart message
     email_message = MIMEMultipart()
     email_message['From'] = sender_email
-    email_message['To'] = receiver_email
+    email_message['To'] = ", ".join(receiver_email)
     email_message['Subject'] = subject
 
     # Add the message body

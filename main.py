@@ -78,7 +78,7 @@ def send_email(mes):
     
     # Email configuration
     sender_email = os.environ["username"]
-    receiver_email = 'krishnavalliappan02@gmail.com'
+    receiver_email = ['krishnavalliappan02@gmail.com', "madhumithaj2000@gmail.com", "lakshminarasimhan.lnr@gmail.com", "viikneswaran@gmail.com" ]
     subject = '‼‼ Urgent: Amazon a job opening in Quebec Canada'
     message = f"""Opening in following places: \n
                 {message_list(mes)}

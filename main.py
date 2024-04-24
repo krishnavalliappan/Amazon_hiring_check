@@ -26,6 +26,7 @@ formatter = logging.Formatter(
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
+
 if __name__ == "__main__":
     checker = CheckURL(url, logger, sender_email, password)
     while True:

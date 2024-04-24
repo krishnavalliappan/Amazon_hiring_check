@@ -22,7 +22,6 @@ env/
 *.pyc
 
 # Logs and temporary files
-*.log
 *.swp
 *.swo
 *.tmp

@@ -1,4 +1,4 @@
-# import time
+import time
 import requests
 from bs4 import BeautifulSoup
 from send_mail import EmailSender
@@ -10,8 +10,19 @@ class CheckURL:
         self.sender_email = sender_email
         self.sender_password = sender_password
         self.QC_text = "QC Canada"
-        self.BC_text = "N Germany"
+        self.BC_text = "BC Canada"
         self.email = False
+        self.places_mail_sent = []
+        self.start_time = time.monotonic()
+        self.last_run_time = 0
+        self.current_time = 0
+        self.elapsed_time = 0
+        self.record_time()
+    
+    def record_time(self):
+        self.current_time = time.monotonic()
+        self.elapsed_time = self.current_time - self.start_time
+        
 
     def fetch_data(self):
         response = requests.get(self.url)
@@ -81,11 +92,14 @@ class CheckURL:
     def send_email(self):
         places_QC, places_BC, QC, BC = self.check_places()
         
+        self.record_time()
+        
         if self.email:
             email_sender = EmailSender(self.sender_email, self.sender_password)
             log_msg = ""
             if QC:
                 log_msg += email_sender.send_email(places_QC, "QC")
+                self.places_mail_sent.extend(places_QC)
             if BC:
                 log_msg += email_sender.send_email(places_BC, "BC")
             self.logger.info(log_msg)

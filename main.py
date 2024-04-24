@@ -29,8 +29,7 @@ logger.addHandler(logger_file_handler)
 
 if __name__ == "__main__":
     checker = CheckURL(url, logger, sender_email, password)
-    while True:
-        try:
-            checker.send_email()
-        except:
-            logger.exception("Exception occured")
+    try:
+        checker.send_email()
+    except:
+        logger.exception("Exception occured")

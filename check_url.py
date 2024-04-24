@@ -1,4 +1,4 @@
-# import time
+import time
 import requests
 from bs4 import BeautifulSoup
 from send_mail import EmailSender
@@ -10,8 +10,25 @@ class CheckURL:
         self.sender_email = sender_email
         self.sender_password = sender_password
         self.QC_text = "QC Canada"
-        self.BC_text = "N Germany"
+        self.BC_text = "BC Canada"
         self.email = False
+        self.places_mail_sent_10 = []
+        
+        # time items
+        self.start_time = time.monotonic()
+        self.last_run_time = 0
+        self.current_time = 0
+        self.elapsed_time = 0
+        self.record_time()
+        
+    def record_time(self):
+        self.current_time = time.monotonic()
+        self.elapsed_time = self.current_time - self.start_time
+    
+    def reset_places_sent(self):
+        if (self.elapsed_time - self.last_run_time) > 600:
+            self.places_mail_sent_10 = []
+            self.last_run_time = self.elapsed_time
 
     def fetch_data(self):
         response = requests.get(self.url)
@@ -78,17 +95,38 @@ class CheckURL:
         else:
             return [], [], False, False
     
+    def add_mail_sent(self, places):
+        for place in places:
+            if place not in self.places_mail_sent_10:
+                self.places_mail_sent_10.append(place)
+    
+    def check_mail_sent(self, places):
+        if places == []:
+            return False
+        for place in places:
+            if place not in self.places_mail_sent_10:
+                return True
+        return False
+        
+    
     def send_email(self):
         places_QC, places_BC, QC, BC = self.check_places()
+        
+        self.record_time()
+        
+        check_mail_QC = self.check_mail_sent(places_QC)
+        check_mail_BC = self.check_mail_sent(places_BC)
         
         if self.email:
             email_sender = EmailSender(self.sender_email, self.sender_password)
             log_msg = ""
-            if QC:
+            if QC and check_mail_QC:
                 log_msg += email_sender.send_email(places_QC, "QC")
-            if BC:
+                self.add_mail_sent(places_QC)
+            if BC and check_mail_BC:
                 log_msg += email_sender.send_email(places_BC, "BC")
-            self.logger.info(log_msg)
-            
-        else:
-            self.logger.info("No email sent")
+                self.add_mail_sent(places_BC)
+            if not log_msg == "":
+                self.logger.info(log_msg)      
+        
+        self.reset_places_sent()

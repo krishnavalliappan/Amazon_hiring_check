@@ -32,5 +32,7 @@ if __name__ == "__main__":
     while True:
         try:
             checker.send_email()
+            time.sleep(60)
         except:
             logger.exception("Exception occured")
+            time.sleep(600)

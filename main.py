@@ -10,8 +10,8 @@ load_dotenv()
 # The URL you will send the POST request to
 url = 'https://hvr-amazon.my.site.com/BBIndex'
 
-sender_email = os.environ["USERNAME"]
-password = os.environ["PASSWORD"]
+sender_email = os.environ["username"]
+password = os.environ["password"]
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)

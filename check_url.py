@@ -44,7 +44,7 @@ class CheckURL:
         return spans
     
     def place_match(self, place, place_to_match):
-        place_not_to_match = "Coteau-du-Lac, QC Canada"
+        place_not_to_match = "Coteau-du, QC Canada"
         if place[-9:] == place_to_match:
             if place == place_not_to_match:
                 return False

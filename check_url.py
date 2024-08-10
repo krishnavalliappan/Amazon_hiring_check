@@ -10,7 +10,7 @@ class CheckURL:
         self.sender_email = sender_email
         self.sender_password = sender_password
         self.QC_text = "QC Canada"
-        self.BC_text = "BC Canada"
+        self.BC_text = "B  Canada"
         self.email = False
         self.places_mail_sent_10 = []
         
@@ -61,10 +61,7 @@ class CheckURL:
         return spans
     
     def place_match(self, place, place_to_match):
-        place_not_to_match = "Coteau-du-Lac, QC Canada"
         if place[-9:] == place_to_match:
-            if place == place_not_to_match:
-                return False
             return True
     
     def check_places(self):

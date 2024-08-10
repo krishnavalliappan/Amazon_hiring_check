@@ -6,7 +6,9 @@ class EmailSender:
     def __init__(self, sender_email, sender_password):
         self.sender_email = sender_email
         self.sender_password = sender_password
-        self.recipient_email_QC = ['krishnavalliappan02@gmail.com', "madhumithaj2000@gmail.com", "lakshminarasimhan.lnr@gmail.com"]
+        self.recipient_email_QC = ['krishnavalliappan02@gmail.com', "madhumithaj2000@gmail.com", "lakshminarasimhan.lnr@gmail.com", 
+                                   "meeramnair99@gmail.com", "anjalijojimathew@gmail.com", "k.adilmanzoor@gmail.com", "jothibasulkv01@gmail.com", 
+                                   "rishiravishankar7@gmail.com","kavya4keerthana@gmail.com"]
         self.recipient_email_BC = ["meeramnair99@gmail.com", "mkrishnanunni03@gmail.com", "krishnavalliappan02@gmail.com"]
         # self.recipient_email_BC = ["krishnavalliappan02@gmail.com", "krishnavalliappan24@gmail.com"]
         self.amazon_link = "https://hvr-amazon.my.site.com/BBIndex"

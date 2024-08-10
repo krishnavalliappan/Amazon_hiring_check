@@ -4,6 +4,7 @@ import logging
 import logging.handlers
 from check_url import CheckURL
 import time
+import datetime
 
 load_dotenv()
 
@@ -26,13 +27,13 @@ formatter = logging.Formatter(
 logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
-
 if __name__ == "__main__":
     checker = CheckURL(url, logger, sender_email, password)
     while True:
         try:
             checker.send_email()
             time.sleep(60)
+            print(f"{datetime.datetime.now()} is the time and its still running")
         except:
             logger.exception("Exception occured")
-            time.sleep(600)
+            time.sleep(60) 

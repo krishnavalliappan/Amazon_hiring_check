@@ -10,7 +10,7 @@ class CheckURL:
         self.sender_email = sender_email
         self.sender_password = sender_password
         self.QC_text = "QC Canada"
-        self.BC_text = "BC Canada"
+        self.BC_text = "ON Canada"
         self.email = False
         
     def fetch_data(self):

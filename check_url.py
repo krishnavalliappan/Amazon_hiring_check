@@ -88,7 +88,7 @@ class CheckURL:
             if QC:
                 log_msg += email_sender.send_email(places_QC, "QC")
             if BC:
-                log_msg += email_sender.send_email(places_BC, "BC")
+                log_msg += email_sender.send_email(places_BC, "ON")
             self.logger.info(log_msg)
             
         else:
